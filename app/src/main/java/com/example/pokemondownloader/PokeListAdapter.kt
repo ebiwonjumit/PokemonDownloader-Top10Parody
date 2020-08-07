@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokemondownloader.db.Pokemon
 import com.squareup.picasso.Picasso
 
-class RecyclerAdapter(private val mDataset: List<PokemonDao>): RecyclerView.Adapter<RecyclerAdapter.PokemonViewHolder>() {
+class RecyclerAdapter(private val mDataset: List<Pokemon>): RecyclerView.Adapter<RecyclerAdapter.PokemonViewHolder>() {
 
     class PokemonViewHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.recycler_item, parent, false)){
         private var mNameView: TextView? = null
@@ -22,10 +23,10 @@ class RecyclerAdapter(private val mDataset: List<PokemonDao>): RecyclerView.Adap
             mImageView = itemView.findViewById(R.id.recyclerImage)
         }
 
-        fun bind(pokemonDao: PokemonDao){
-            Picasso.get().load(imageUri+pokemonDao.id.toString() + ".png").into(mImageView)
-            mNameView?.text = pokemonDao.name
-            mStatView?.text = pokemonDao.baseStats.toString()
+        fun bind(pokemon: Pokemon){
+            Picasso.get().load(imageUri+pokemon.pokemonId.toString() + ".png").into(mImageView)
+            mNameView?.text = pokemon.name
+            mStatView?.text = pokemon.baseStats.toString()
         }
     }
 
@@ -35,7 +36,7 @@ class RecyclerAdapter(private val mDataset: List<PokemonDao>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        val pokemon: PokemonDao = mDataset[position]
+        val pokemon: Pokemon = mDataset[position]
         holder.bind(pokemon)
     }
 
