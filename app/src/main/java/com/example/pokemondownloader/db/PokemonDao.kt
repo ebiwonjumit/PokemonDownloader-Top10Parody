@@ -12,10 +12,10 @@ import io.reactivex.Maybe
 @Dao
 interface PokemonDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pokemon: Pokemon)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pokemon: List<Pokemon>)
 
     @Update

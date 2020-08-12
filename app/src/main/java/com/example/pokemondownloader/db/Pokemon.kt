@@ -14,3 +14,12 @@ data class Pokemon(
     @ColumnInfo(name="base_experience")
     val baseExperience: Int) {
 }
+
+// A comparator to compare last names of Name
+class SortByNameComparator: Comparator<Pokemon>{
+    override fun compare(o1: Pokemon?, o2: Pokemon?): Int {
+        if (o1 == null || o2 == null)
+            return 0
+        return o1.name.compareTo(o2.name)
+    }
+}

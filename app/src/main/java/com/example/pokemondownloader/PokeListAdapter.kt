@@ -14,24 +14,16 @@ import com.example.pokemondownloader.ui.EMPTY_LIST
 import com.squareup.picasso.Picasso
 
 class PokemonViewHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(R.layout.recycler_item,parent, false)){
-   private var nameView: TextView? = null
-   private var statView: TextView? = null
-   private var imageView: ImageView? = null
-   private var exp: Context
+   private var  nameView: TextView = itemView.findViewById(R.id.recyclerName)
+    private var statView: TextView = itemView.findViewById(R.id.recyclerBaseStat)
+    private var imageView: ImageView = itemView.findViewById(R.id.recyclerImage)
+    private var exp: Context = itemView.context
 
-
-    init{
-        nameView = itemView.findViewById(R.id.recyclerName)
-        statView = itemView.findViewById(R.id.recyclerBaseStat)
-        imageView = itemView.findViewById(R.id.recyclerImage)
-        exp = itemView.context
-
-    }
 
     fun bind(pokemon: Pokemon){
     Picasso.get().load(IMAGE_URI+pokemon.pokemonId+".png").into(imageView)
-    nameView?.text = pokemon.name
-    statView?.text = exp.getString(R.string.pokemon_exp, pokemon.baseExperience)
+    nameView.text = pokemon.name
+    statView.text = exp.getString(R.string.pokemon_exp, pokemon.baseExperience)
 }
 
 }
@@ -61,4 +53,5 @@ class PokeListAdapter(): RecyclerView.Adapter<PokemonViewHolder>() {
         return list.size
     }
 
+    //TODO Rx Listen Events publish Subject or ClickEvent
 }

@@ -24,7 +24,7 @@ class PokeRepository @Inject constructor(
 
     fun getPokemonById(pokemonId: Int): Single<Pokemon> {
         return pokemonDao.getPokemonById(pokemonId)
-            .switchIfEmpty(pokeApi.getPokemonById(pokemonId.toString())
+            .switchIfEmpty(pokeApi.getPokemonById(pokemonId.toString()).subscribeOn(Schedulers.io())
                 .map { pokemonMapper.convert(it) }
                 .doOnSuccess { pokemonDao.insert(it) })
     }
@@ -33,7 +33,7 @@ class PokeRepository @Inject constructor(
     fun getPokemonById(ids: List<Int>): Single<List<Pokemon>> {
         var pokemonRequests = ids.map { pokemonId ->
             pokemonDao.getPokemonById(pokemonId)
-                .switchIfEmpty(pokeApi.getPokemonById(pokemonId.toString())
+                .switchIfEmpty(pokeApi.getPokemonById(pokemonId.toString()).subscribeOn(Schedulers.io())
                     .map { pokemonMapper.convert(it) }
                 )
         }
