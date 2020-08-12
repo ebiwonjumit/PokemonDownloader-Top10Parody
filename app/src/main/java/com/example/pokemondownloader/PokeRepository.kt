@@ -1,32 +1,43 @@
 package com.example.pokemondownloader
 
+import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.example.pokemondownloader.db.Pokemon
 import com.example.pokemondownloader.db.PokemonDao
+import io.reactivex.Flowable
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PokeRepository private constructor(private val pokemonDao: PokemonDao){
+@Singleton
+class PokeRepository @Inject constructor(
+    private val pokemonDao: PokemonDao,
+    private val pokeApi: PokeApi,
+    private val pokemonMapper: PokemonMapper
+) {
 
 
-        private val mPokemons = listOf(
-            Pokemon("1", "Pikachu", 1),
-            Pokemon("35", "Solomon", 2),
-            Pokemon("50", "Turtwig", 3),
-            Pokemon("899", "Persona", 4),
-            Pokemon("74474873", "Ditto", 5)
-    )
+    fun getPokemon() = pokemonDao.getAllPokemon()
 
-//    fun getPokemons() = pokemonDao.getPokemons()
-//
-//    fun getPokemon(pokemonId: String) = pokemonDao.getPokemon(pokemonId)
-//
-//    companion object{
-//
-//        @Volatile private var instance: PokeRepository? = null
-//
-//        fun getInstance(pokemonDao: PokemonDao){
-//            instance ?: synchronized(this){
-//                instance ?:PokeRepository(pokemonDao).also { instance = it}
-//            }
-//        }
-//
-//    }
+    fun getPokemonById(pokemonId: Int): Single<Pokemon> {
+        return pokemonDao.getPokemonById(pokemonId)
+            .switchIfEmpty(pokeApi.getPokemonById(pokemonId.toString())
+                .map { pokemonMapper.convert(it) }
+                .doOnSuccess { pokemonDao.insert(it) })
+    }
+
+
+    fun getPokemonById(ids: List<Int>): Single<List<Pokemon>> {
+        var pokemonRequests = ids.map { pokemonId ->
+            pokemonDao.getPokemonById(pokemonId)
+                .switchIfEmpty(pokeApi.getPokemonById(pokemonId.toString())
+                    .map { pokemonMapper.convert(it) }
+                )
+        }
+        return Single.merge(pokemonRequests).toList().doOnSuccess{ pokemonDao.insert(it)}
+    }
+
 }

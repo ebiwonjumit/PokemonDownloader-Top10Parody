@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/PokeListFragment"
-        android:name="com.example.pokemondownloader.PokeListFragment"
-        android:label="PokeList"
+        android:name="com.example.pokemondownloader.ui.PokeListFragment"
+        android:label="@string/app_name"
         tools:layout="@layout/poke_list_layout">
         <action
             android:id="@+id/action_PokeListFragment_to_PokeDetailFragment"
@@ -17,8 +17,8 @@
 
     <fragment
         android:id="@+id/PokeDetailFragment"
-        android:name="com.example.pokemondownloader.PokeDetailFragment"
-        android:label="Detail Page"
+        android:name="com.example.pokemondownloader.ui.PokeDetailFragment"
+        android:label="@string/app_name"
         tools:layout="@layout/poke_detail_layout" />
 
 </navigation>

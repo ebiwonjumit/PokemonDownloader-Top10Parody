@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">PokemonDownloader</string>
+    <string name="app_name">Pokemon Downloader</string>
+    <string name="pokemon_exp"> %dexp</string>
+    <string name="download">Download Pokemon</string>
 </resources>

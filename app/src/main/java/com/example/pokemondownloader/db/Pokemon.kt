@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
 data class Pokemon(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val pokemonId: String,
+    val pokemonId: Int,
     @ColumnInfo(name = "name")
     val name: String,
-    @ColumnInfo(name="base_stats")
-    val baseStats: Int) {
+    @ColumnInfo(name="base_experience")
+    val baseExperience: Int) {
 }

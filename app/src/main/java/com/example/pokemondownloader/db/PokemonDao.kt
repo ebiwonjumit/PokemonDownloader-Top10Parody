@@ -1,7 +1,9 @@
 package com.example.pokemondownloader.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+import io.reactivex.Completable
+import io.reactivex.Flowable
+import io.reactivex.Maybe
 
 
 /**
@@ -11,22 +13,27 @@ import androidx.room.*
 interface PokemonDao {
 
     @Insert
-    fun insert(pokemons: List<Pokemon>?)
+    fun insert(pokemon: Pokemon)
+
+    @Insert
+    fun insert(pokemon: List<Pokemon>)
 
     @Update
-    fun update(pokemon: Pokemon?)
+    fun update(pokemon: Pokemon)
 
     @Delete
-    fun delete(pokemon: Pokemon?)
+    fun delete(pokemon: Pokemon)
 
     @Delete
-    fun deletePokemons(pokemons: List<Pokemon>?)
+    fun deletePokemons(pokemons: List<Pokemon>)
 
-//    @Query("DELETE FROM pokemon_table")
-//    fun deleteAllPokemons(): Single<Int>
+    @Query("DELETE FROM pokemon_table")
+    fun deleteAllPokemons(): Completable
+
+    @Query("SELECT * FROM pokemon_table WHERE id = :pokemonId")
+    fun getPokemonById(pokemonId: Int) : Maybe<Pokemon>
 
     @Query("SELECT * FROM pokemon_table ORDER BY id DESC")
-    fun getAllPokemon(): LiveData<List<Pokemon>>
-
+    fun getAllPokemon(): Flowable<List<Pokemon>>
 
 }
