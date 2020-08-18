@@ -1,14 +1,13 @@
-package com.example.pokemondownloader.retrofit
+package com.example.pokemondownloader.di
 
 import android.app.Application
 import com.example.pokemondownloader.BaseApplication
-import com.example.pokemondownloader.MainActivity
-import com.example.pokemondownloader.ui.PokeDetailFragment
-import com.example.pokemondownloader.ui.PokeListFragment
+import com.example.pokemondownloader.ui.MainActivity
+import com.example.pokemondownloader.ui.detail.PokeDetailFragment
+import com.example.pokemondownloader.ui.list.PokeListFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton

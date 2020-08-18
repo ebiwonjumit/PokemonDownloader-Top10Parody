@@ -1,4 +1,4 @@
-package com.example.pokemondownloader
+package com.example.pokemondownloader.network
 
 import javax.inject.Inject
 

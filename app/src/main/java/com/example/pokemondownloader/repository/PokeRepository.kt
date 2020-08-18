@@ -1,13 +1,10 @@
-package com.example.pokemondownloader
+package com.example.pokemondownloader.repository
 
-import android.annotation.SuppressLint
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import com.example.pokemondownloader.network.PokeApi
+import com.example.pokemondownloader.network.PokemonMapper
 import com.example.pokemondownloader.db.Pokemon
 import com.example.pokemondownloader.db.PokemonDao
-import io.reactivex.Flowable
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,6 +1,6 @@
-package com.example.pokemondownloader.retrofit
+package com.example.pokemondownloader.di
 
-import com.example.pokemondownloader.MainActivity
+import com.example.pokemondownloader.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

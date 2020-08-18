@@ -1,4 +1,4 @@
-package com.example.pokemondownloader
+package com.example.pokemondownloader.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.example.pokemondownloader
+package com.example.pokemondownloader.network
 
 import com.google.gson.annotations.SerializedName
 

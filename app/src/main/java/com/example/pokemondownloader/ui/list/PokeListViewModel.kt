@@ -1,12 +1,10 @@
-package com.example.pokemondownloader.ui
+package com.example.pokemondownloader.ui.list
 
-import android.util.Log
+
 import androidx.lifecycle.*
-import com.example.pokemondownloader.PokeRepository
+import com.example.pokemondownloader.repository.PokeRepository
 import com.example.pokemondownloader.db.Pokemon
 import com.example.pokemondownloader.db.SortByNameComparator
-import io.reactivex.Scheduler
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -16,7 +14,7 @@ import kotlin.random.Random
 val EMPTY_LIST: List<Pokemon> = Collections.emptyList()
 
 
-class PokeViewModel @Inject constructor(private val pokeRepository: PokeRepository) : ViewModel() {
+class PokeListViewModel @Inject constructor(private val pokeRepository: PokeRepository) : ViewModel() {
 
     fun randomPokeIds() = List(10) { Random.nextInt(1, 807) }
 
@@ -32,7 +30,7 @@ class PokeViewModel @Inject constructor(private val pokeRepository: PokeReposito
     fun loadPokemon() {
         pokeRepository.getPokemonById(randomPokeIds()).doOnSubscribe {
             _requestButtonState.postValue(false)
-        }.doOnEvent { t1, t2 -> _requestButtonState.postValue(true) }
+        }.doOnEvent { _, _ -> _requestButtonState.postValue(true) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe()

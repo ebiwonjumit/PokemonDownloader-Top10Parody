@@ -1,17 +1,12 @@
-package com.example.pokemondownloader
+package com.example.pokemondownloader.ui
 
-import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import dagger.android.support.DaggerAppCompatActivity
+import com.example.pokemondownloader.BaseApplication
+import com.example.pokemondownloader.R
 
 class MainActivity : AppCompatActivity(){
 

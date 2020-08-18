@@ -1,4 +1,4 @@
-package com.example.pokemondownloader.retrofit
+package com.example.pokemondownloader.di
 import javax.inject.Scope
 
 @Scope
