@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,11 +15,13 @@ import javax.inject.Inject
 
 class PokeListFragment : Fragment(R.layout.poke_list_layout) {
 
-    @Inject
-    lateinit var pokeListViewModel: PokeListViewModel
+
     @Inject
     lateinit var injectedAdapter: PokeListAdapter
-//    @Inject lateinit var picasso: Picasso
+    @Inject
+    lateinit var pokeListViewModelFactory: PokeListViewModelFactory
+
+    val  pokeListViewModel by viewModels<PokeListViewModel> {pokeListViewModelFactory }
 
 
     override fun onAttach(context: Context) {
@@ -62,8 +65,8 @@ class PokeListFragment : Fragment(R.layout.poke_list_layout) {
     }
 
     fun onItemClick(id:Int){
-        val bundle = bundleOf("pokemonId" to id)
-        view?.findNavController()?.navigate(R.id.action_PokeListFragment_to_PokeDetailFragment, bundle)
+        val action = PokeListFragmentDirections.actionPokeListFragmentToPokeDetailFragment(id)
+        view?.findNavController()?.navigate(action)
     }
 
 

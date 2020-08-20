@@ -1,6 +1,7 @@
 package com.example.pokemondownloader.ui.list
 
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.pokemondownloader.repository.PokeRepository
 import com.example.pokemondownloader.db.Pokemon
@@ -14,11 +15,14 @@ import kotlin.random.Random
 val EMPTY_LIST: List<Pokemon> = Collections.emptyList()
 
 
-class PokeListViewModel @Inject constructor(private val pokeRepository: PokeRepository) : ViewModel() {
+class PokeListViewModel(private val pokeRepository: PokeRepository) : ViewModel() {
 
     fun randomPokeIds() = List(10) { Random.nextInt(1, 807) }
 
 
+    init{
+        Log.d("Here", "Sup")
+    }
 
     private val _requestButtonState = MutableLiveData(true)
     val requestButtonState: LiveData<Boolean> = _requestButtonState

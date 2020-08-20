@@ -12,13 +12,17 @@
         tools:layout="@layout/poke_list_layout">
         <action
             android:id="@+id/action_PokeListFragment_to_PokeDetailFragment"
-            app:destination="@id/PokeDetailFragment" />
+            app:destination="@id/PokeDetailFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/PokeDetailFragment"
         android:name="com.example.pokemondownloader.ui.detail.PokeDetailFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/poke_detail_layout" />
+        tools:layout="@layout/poke_detail_layout">
+        <argument
+            android:name="pokmonId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
